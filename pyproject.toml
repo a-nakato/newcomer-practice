@@ -1,0 +1,73 @@
+[project]
+name = "newcomer-practice"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "a-nakato", email = "nakato.a.76e3@m.isct.ac.jp" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "matplotlib>=3.11.2",
+    "numpy>=2.5.3",
+]
+
+[tool.ruff]
+indent-width = 4
+line-length = 120
+exclude = [".ruff_cache", ".ruff.toml", ".ruff.lock", ".git", ".venv"]
+target-version = "py312"
+
+[tool.ruff.lint]
+select = [
+    "F", # Pyflakes
+    "B", # flake8-bugbear
+    "I", # isort
+    "E", # pycodestyle error
+    "W", # pycodestyle warning
+]
+ignore = ["F401", "E501"]
+fixable = ["ALL"]
+unfixable = []
+
+[tool.ruff.isort]
+combine-as-imports = true
+section-order = ["future", "standard-library", "third-party", "first-party", "local-folder"]
+split-on-trailing-comma = true
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.ruff.lint.isort]
+known-third-party = ["fastapi", "pydantic", "starlette"]
+
+[tool.pytest.ini_options]
+filterwarnings = [
+    "ignore:.*Jupyter is migrating.*:DeprecationWarning",
+]
+addopts = "-vv --color=yes"
+
+[dependency-groups]
+dev = [
+    "ty",
+    "notebook",
+    "pandas",
+    "pytest",
+    "pyyaml",
+    "ruff",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.metadata]
+dynamic = ["name", "version"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["pack_test"]
+
+[project.scripts]
+kadai_test1 = "pack_test.test1:main"
+
+
